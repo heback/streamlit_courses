@@ -2,7 +2,7 @@ import streamlit as st
 import os
 import pandas as pd
 import docx2txt as docx2txt
-from PyPDF2 import PdfFileReader
+from PyPDF2 import PdfReader
 from PIL import Image
 
 @st.cache_data
@@ -10,12 +10,12 @@ def load_image(img_file):
     return Image.open(img_file)
 
 def read_pdf(file):
-    pdf = PdfFileReader(file)
-    count = pdf.numPages
+    pdf = PdfReader(file)
+    count = len(pdf.pages)
     all_page_text = ''
     for i in range(count):
-        page = pdf.getPage(i)
-        all_page_text += page.extractText()
+        page = pdf.pages[i]
+        all_page_text += page.extract_text()
     return all_page_text
 
 
@@ -81,3 +81,5 @@ elif choice == 'DocumentFiles':
 
 else:
     st.subheader('About')
+    st.text('대구과학고 교사 이준구')
+    st.text('streamlit 실습 코드')
