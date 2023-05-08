@@ -1,5 +1,3 @@
-import os.path
-
 import cv2
 import streamlit as st
 from keras.models import load_model
@@ -8,15 +6,9 @@ import numpy as np
 # pip install streamlit-drawable-canvas
 from streamlit_drawable_canvas import st_canvas
 
-# 경로 설정
-file_path = os.path.dirname(__file__)
-
-# 모델파일 폴더 생성
-save_dir = os.path.join(file_path, 'model')
-
 # 학습된 모델 불러오기
 model_file = 'minist_model.h5'
-model = load_model(os.path.join(save_dir, model_file))
+model = load_model(model_file)
 
 # 헤더 출력
 st.subheader('손글씨 숫자 인식')
